@@ -3,6 +3,7 @@ import './app.scss';
 
 import { Routes, Route } from 'react-router-dom';
 
+import SCREENS from './route/router';
 import Home from './screens/home/Home';
 import Login from './screens/login/Login';
 
@@ -10,8 +11,13 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/login" element={<Login />}/>
+        <Route path={SCREENS.home} element={<Home />}/>
+        <Route path={SCREENS.login} element={<Login />}/>
+        <Route path={SCREENS.signup} element={<Login />}/>
+        <Route path={SCREENS.tutorial} element={<Login />}/>
+        <Route path={SCREENS.game} element={<Login />}/>
+        <Route path={SCREENS.result} element={<Login />}/>
+        <Route path={SCREENS.leaderboard} element={<Login />}/>
       </Routes>
     </div>
   );
