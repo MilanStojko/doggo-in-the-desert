@@ -1,0 +1,36 @@
+// ----------------- PARALLAX ------------------
+
+.bg-container{
+    position: relative;
+}
+  
+@keyframes moving-img {
+  0%{left: 0;}
+  50%{left: -99999px;}
+  100%{left: 0;}
+}
+
+.layer{
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  &.layer-04{
+    background: url('./assets/images/04-layer.png') 0 0;
+    animation: moving-img 20000s linear infinite;
+  }
+  &.layer-03{
+    background: url('./assets/images/03-layer.png') 0 0;
+    animation: moving-img 10000s linear infinite;
+  }
+  &.layer-02{
+    background: url('./assets/images/02-layer.png') 0 0;
+    animation: moving-img 6000s linear infinite;
+  }
+  &.layer-01{
+    background: url('./assets/images/01-layer.png') 0 0;
+    animation: moving-img 3000s linear infinite;
+  }
+}
