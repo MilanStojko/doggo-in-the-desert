@@ -1,0 +1,19 @@
+@keyframes doggo{
+    from {
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100%);
+    }
+}
+
+.dog{
+    width: 100px;
+    height: 72px;
+    overflow: hidden;
+}
+.doggo_img{
+    animation: doggo .7s steps(10) infinite;
+    height: 72px;
+    max-width: auto;
+}
