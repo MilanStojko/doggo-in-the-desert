@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './app.scss';
 
-import Button from './components/ui/button/Button';
+import InputBox from './components/ui/inputBox/InputBox';
 
 function App() {
   return (
     <div>
-      <Button />
+
     </div>
   );
 }
