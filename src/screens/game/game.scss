@@ -1,40 +1,64 @@
+@import "./../../style/common.scss";
 // ----------------- PARALLAX ------------------
 
-.bg-container{
-    position: relative;
-}
-  
 @keyframes moving-img {
-  0%{left: 0;}
-  50%{left: -99999px;}
-  100%{left: 0;}
+  0% {
+    left: 0;
+  }
+  50% {
+    left: -99999px;
+  }
+  100% {
+    left: 0;
+  }
 }
 
-.layer{
-  height: 100vh;
+.layer {
+  height: calc(100vh - 8vh);
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  &.layer-04{
-    background: url('../../assets/images/04-layer.png') repeat-x;
+  &.layer-04 {
+    background: url("../../assets/images/04-layer.png") repeat-x;
     animation: moving-img 20000s linear infinite;
     background-size: auto 100%;
   }
-  &.layer-03{
-    background: url('../../assets/images/03-layer.png') repeat-x;
+  &.layer-03 {
+    background: url("../../assets/images/03-layer.png") repeat-x;
     animation: moving-img 10000s linear infinite;
     background-size: auto 100%;
   }
-  &.layer-02{
-    background: url('../../assets/images/02-layer.png') repeat-x;
+  &.layer-02 {
+    background: url("../../assets/images/02-layer.png") repeat-x;
     animation: moving-img 6000s linear infinite;
     background-size: auto 100%;
   }
-  &.layer-01{
-    background: url('../../assets/images/01-layer.png') repeat-x;
+  &.layer-01 {
+    background: url("../../assets/images/01-layer.png") repeat-x;
     animation: moving-img 3000s linear infinite;
     background-size: auto 100%;
   }
+}
+.street {
+  position: absolute;
+  bottom: 0;
+  height: 8vh;
+  background-color: $yellow;
+  width: 100vw;
+}
+.doggo {
+  position: absolute;
+  background-color: black;
+  height: 72px;
+  width: 100px;
+  border-radius: 50%;
+  z-index: 99;
+}
+.balk {
+  position: relative;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 99;
 }
