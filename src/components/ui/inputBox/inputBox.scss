@@ -10,7 +10,7 @@ input {
   &:focus{
     outline: none;
     border-bottom: solid 2px $yellow;
-    margin-bottom: -1px;
+    margin-bottom: 9px;
   }
 }
 ::placeholder {

@@ -10,7 +10,7 @@ function InputBox(props) {
   }
 
   function focus(e) {
-    if (!!props.callBackChange) {
+    if (!!props.callBackFocus) {
       props.callBackFocus(e)
     }
   }
