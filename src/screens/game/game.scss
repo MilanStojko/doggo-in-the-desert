@@ -32,20 +32,23 @@
     animation: moving-img 3000s linear infinite;
   }
   .bg{
-    background-size: contain;
     height: 100%;
   }
   .bg-04{
     background: url('../../assets/images/04-layer.png') repeat-x;
+    background-size: contain;
   }
   .bg-03{
     background: url('../../assets/images/03-layer.png') repeat-x;
+    background-size: contain;
   }
   .bg-02{
     background: url('../../assets/images/02-layer.png') repeat-x;
+    background-size: contain;
   }
   .bg-01{
     background: url('../../assets/images/01-layer.png') repeat-x;
+    background-size: contain;
   }
   
 }
