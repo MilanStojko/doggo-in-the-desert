@@ -1,3 +1,28 @@
+.login, .signup{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-items: center;
+    padding: 20px;
+    section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        min-height: calc(100vh - 40px);
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    h1{
+        font-size: 26px;
+    }
+}
+
 .alertActive{
     color: red;
+    font-size: 12px;
 }

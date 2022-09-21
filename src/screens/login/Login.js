@@ -17,7 +17,6 @@ function Login() {
     alertActive: false
 
   })
-  let playersList = []
   let navigate = useNavigate()
 
   function getUsername(e){
@@ -28,24 +27,29 @@ function Login() {
   }
 
   function submit(){
-    playersList.push(JSON.parse(localStorage.getItem('player')))
-    playersList.map((element) => {
 
+    let playersList = JSON.parse(localStorage.getItem('players')) || []
+    let check = false
+
+    playersList.map((element) => {
       if(element.username === state.player.username && element.password === state.player.password){
         navigate(SCREENS.tutorial)
-      } else{
+      } else {
         setState({
           ...state,
           alertActive: true
         })
       }
+    })
+  }
 
-    }) 
+  function goToSignup(){
+    navigate(SCREENS.signup)
   }
 
   return (
     <div className="login">
-      <div>
+      <section>
         <h1>Login</h1>
         <form>
           <InputBox 
@@ -63,15 +67,25 @@ function Login() {
             <div className="alertActive">Username or Password wrong</div>
           }
 
-          <Button callBackClick={submit} classCss={state.alertActive} />
+          <Button
+            callBackClick={submit}
+            label={'login'}
+          />
         </form>
 
         <Button
-          placeholder={'or Sign in'}
+          label={'or Sign in'}
+          objCss={{
+            backgroundColor: 'transparent',
+            fontSize: '10px',
+            color: 'rgba(0,0,0,0.7)',
+            marginTop: '0'
+          }}
+          callBackClick={goToSignup}
         />
-      </div>
+      </section>
 
-      <div><img src={require('../../assets/images/sphinx.png')} alt="" /></div>
+      <section><img src={require('../../assets/images/sphinx.png')} alt="" /></section>
     </div>
   )
 }
