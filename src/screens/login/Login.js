@@ -11,7 +11,8 @@ function Login() {
   const [state, setState] = useState({
     player: {
       username: '',
-      password: ''
+      password: '',
+      score: 0
     },
     alertActive: false
 
@@ -26,14 +27,10 @@ function Login() {
     state.player.password = e.target.value
   }
 
-  function goToTutorial(){
-    
-  }
-
   function submit(){
     playersList.push(JSON.parse(localStorage.getItem('player')))
-    console.log(playersList)
     playersList.map((element) => {
+
       if(element.username === state.player.username && element.password === state.player.password){
         navigate(SCREENS.tutorial)
       } else{
@@ -41,34 +38,40 @@ function Login() {
           ...state,
           alertActive: true
         })
-        console.log('user sbagliato')
       }
-    })
-    console.log(playersList)
-    localStorage.setItem('player', JSON.stringify(state.player))
-    
+
+    }) 
   }
 
   return (
     <div className="login">
-      <form>
-        <InputBox 
-          placeholder={"username"}
-          callBackChange={getUsername}
-        />
-        <InputBox
-          type={"password"}
-          placeholder={"password"}
-          callBackChange={getPassword}
-        />
+      <div>
+        <h1>Login</h1>
+        <form>
+          <InputBox 
+            placeholder={"username"}
+            callBackChange={getUsername}
+          />
+          <InputBox
+            type={"password"}
+            placeholder={"password"}
+            callBackChange={getPassword}
+          />
 
-        {
-          state.alertActive &&
-          <div className="alertActive">Username or Password wrong</div>
-        }
+          {
+            state.alertActive &&
+            <div className="alertActive">Username or Password wrong</div>
+          }
 
-        <Button callBackClick={submit} classCss={state.alertActive} />
-      </form>
+          <Button callBackClick={submit} classCss={state.alertActive} />
+        </form>
+
+        <Button
+          placeholder={'or Sign in'}
+        />
+      </div>
+
+      <div><img src={require('../../assets/images/sphinx.png')} alt="" /></div>
     </div>
   )
 }

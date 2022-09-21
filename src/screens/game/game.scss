@@ -17,20 +17,24 @@
   bottom: 0;
   left: 0;
   right: 0;
-  &.layer-04{
-    background: url('./assets/images/04-layer.png') 0 0;
-    animation: moving-img 20000s linear infinite;
+  animation: moving-img 20000s linear infinite;
+  .layer-04{
+    background: url('../../assets/images/04-layer.png');
+    
+    background-size: cover;
+    width: 300vw;
+    height: 100%;
   }
-  &.layer-03{
-    background: url('./assets/images/03-layer.png') 0 0;
+  .layer-03{
+    background: url('../../assets/images/03-layer.png') 0 0;
     animation: moving-img 10000s linear infinite;
   }
-  &.layer-02{
-    background: url('./assets/images/02-layer.png') 0 0;
+  .layer-02{
+    background: url('../../assets/images/02-layer.png') 0 0;
     animation: moving-img 6000s linear infinite;
   }
-  &.layer-01{
-    background: url('./assets/images/01-layer.png') 0 0;
+  .layer-01{
+    background: url('../../assets/images/01-layer.png') 0 0;
     animation: moving-img 3000s linear infinite;
   }
 }
