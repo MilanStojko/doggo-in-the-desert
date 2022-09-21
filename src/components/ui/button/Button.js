@@ -35,7 +35,8 @@ Button.defaultProps = {
     backgroundColor: '#FFDC3B',
     fontSize: '16px',
     padding: '10px 20px',
-    borderRadius: '3px'
+    borderRadius: '3px',
+    marginTop: '10px'
   }
 }
 
