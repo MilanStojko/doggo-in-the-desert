@@ -1,21 +1,23 @@
 import PropTypes from "prop-types"
 
+import './button.scss'
+
 function Button(props) {
 
   function press(e) {
-    if (!!props.callBack) {
+    if (!!props.callBackClick) {
       props.callBackClick(e)
     }
   }
 
   return (
-    <button 
+    <div 
       className={`btn ${(props.classCss)}`} 
       style={props.objCss} 
       onClick={press}
     >
       {props.label}
-    </button>
+    </div>
   )
 }
 
