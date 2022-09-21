@@ -15,6 +15,18 @@ function InputBox(props) {
     }
   }
 
+  function blur(e) {
+    if (!!props.callBackBlur) {
+      props.callBackBlur(e)
+    }
+  }
+
+  function click(e) {
+    if (!!props.callBackClick) {
+      props.callBackClick(e)
+    }
+  }
+
   return (
     <>
       <input
@@ -24,6 +36,8 @@ function InputBox(props) {
         style={props.objCss}
         onChange={change}
         onFocus={focus}
+        onBlur={blur}
+        onClick={click}
       />
     </>
   )
@@ -35,6 +49,7 @@ InputBox.propTypes = {
     placeholder: PropTypes.string.isRequired,
     callBackChange: PropTypes.func,
     callBackFocus: PropTypes.func,
+    callBackBlur: PropTypes.func,
     objCss: PropTypes.object,
 }
 
