@@ -1,7 +1,8 @@
-// ----------------- PARALLAX ------------------
+@import '../../style/common.scss';
 
 .bg-container{
     position: relative;
+    height: 375px;
 }
   
 @keyframes moving-img {
@@ -11,30 +12,48 @@
 }
 
 .layer{
-  height: 100vh;
+  height: calc(100% - 30px);
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  animation: moving-img 20000s linear infinite;
-  .layer-04{
-    background: url('../../assets/images/04-layer.png');
+  &.layer-04{
     
-    background-size: cover;
-    width: 300vw;
-    height: 100%;
+    animation: moving-img 20000s linear infinite;
   }
-  .layer-03{
-    background: url('../../assets/images/03-layer.png') 0 0;
+  &.layer-03{
     animation: moving-img 10000s linear infinite;
   }
-  .layer-02{
-    background: url('../../assets/images/02-layer.png') 0 0;
+  &.layer-02{
     animation: moving-img 6000s linear infinite;
   }
-  .layer-01{
-    background: url('../../assets/images/01-layer.png') 0 0;
+  &.layer-01{
     animation: moving-img 3000s linear infinite;
   }
+  .bg{
+    background-size: contain;
+    height: 100%;
+  }
+  .bg-04{
+    background: url('../../assets/images/04-layer.png') repeat-x;
+  }
+  .bg-03{
+    background: url('../../assets/images/03-layer.png') repeat-x;
+  }
+  .bg-02{
+    background: url('../../assets/images/02-layer.png') repeat-x;
+  }
+  .bg-01{
+    background: url('../../assets/images/01-layer.png') repeat-x;
+  }
+  
+}
+
+.street{
+  background-color: $yellow;
+  height: 30px;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
 }
