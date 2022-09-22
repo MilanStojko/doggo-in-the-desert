@@ -57,6 +57,7 @@ function Signup() {
 
     if(!check && state.checkPassword){
       playersList.push(state.player)
+      navigate(SCREENS.tutorial)
     }
     localStorage.setItem('players', JSON.stringify(playersList))
   }

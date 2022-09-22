@@ -12,6 +12,10 @@ function Result() {
   })
   let navigate = useNavigate()
 
+  function goToHome(){
+    navigate(SCREENS.home)
+  }
+
   function goToGame(){
     navigate(SCREENS.game)
   }
@@ -26,21 +30,44 @@ function Result() {
       <section>
         <h1>Game over</h1>
         <p>Hai totalizzato <span className="yellow-marker">{state.score && state.score}</span> punti</p>
+        <div className="button-container">
+          <Button
+            label={'Restart'}
+            callBackClick={goToGame}
+            objCss={{
+              backgroundColor: '#ffcd4f',
+              color: '#000',
+              border: '1px #ffcd4f solid',
+              fontSize: '16px',
+              padding: '10px 20px',
+              borderRadius: '3px',
+              margin: '0 5px'
+            }}
+          />
+          <Button
+            label={'Rank'}
+            callBackClick={goToLeaderboard}
+            objCss={{
+              backgroundColor: 'transparent',
+              color: '#fff',
+              border: '1px #ffcd4f solid',
+              fontSize: '16px',
+              padding: '10px 20px',
+              borderRadius: '3px',
+              margin: '0 5px'
+            }}
+          />
+        </div>
+
         <Button
-          label={'Restart'}
-          callBackClick={goToGame}
-        />
-        <Button
-          label={'Rank'}
-          callBackClick={goToLeaderboard}
+          label={'Logout'}
           objCss={{
             backgroundColor: 'transparent',
-            border: '1px black solid',
-            fontSize: '16px',
-            padding: '10px 20px',
-            borderRadius: '3px',
-            marginTop: '10px'
+            fontSize: '12px',
+            color: 'rgba(255,255,255,0.7)',
+            marginTop: '0'
           }}
+          callBackClick={goToHome}
         />
       </section>
 
