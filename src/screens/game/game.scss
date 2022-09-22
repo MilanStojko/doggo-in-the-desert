@@ -62,6 +62,7 @@
   height: 72px;
   overflow: hidden;
   z-index: 99;
+  border: 10px solid black;
   .doggo_img {
     animation: doggo 0.7s steps(10) infinite;
     height: 72px;
@@ -74,4 +75,5 @@
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 99;
+  border: 10px solid black;
 }
