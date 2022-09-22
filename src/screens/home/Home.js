@@ -33,7 +33,11 @@ function Home() {
       </div>
 
       <p className="pulse">Press any button to start game</p>
-      <p className="credits">Developed by Milan Stojkovic & Isabella Bagnulo</p>
+      <div className="cover-container">
+        <div></div>
+        <img className="cover" src={require('../../assets/images/cover-home.png')} alt="" />
+        <p className="credits">Developed by<br/>Milan Stojkovic &<br/>Isabella Bagnulo</p>
+      </div>
 
     </div>
   )
