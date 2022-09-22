@@ -1,0 +1,28 @@
+@import '../../style/common.scss';
+
+.leaderboard{
+    background-color: $purple;
+    color: #fff;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    justify-items: center;
+    min-height: calc(100vh - 40px);
+    padding: 20px;
+    section{
+        min-height: calc(100vh - 40px);
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-around;
+        .pharahone{
+            max-height: 80vh;
+        }
+    }
+    ul{
+        margin: 20px 0;
+        max-height: 50vh;
+        overflow-y: scroll;
+        padding: 10px 15px 10px 0;
+    }
+}
