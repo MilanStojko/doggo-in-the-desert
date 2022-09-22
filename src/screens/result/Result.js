@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 
 import SCREENS from "../../route/router"
 import Button from "../../components/ui/button/Button"
@@ -11,6 +11,7 @@ function Result() {
     score: 5
   })
   let navigate = useNavigate()
+  const location = useLocation()
 
   function goToHome(){
     navigate(SCREENS.home)
@@ -21,7 +22,7 @@ function Result() {
   }
 
   function goToLeaderboard(){
-    navigate(SCREENS.home)
+    navigate(SCREENS.leaderboard)
   }
 
   return(
@@ -29,7 +30,7 @@ function Result() {
 
       <section>
         <h1>Game over</h1>
-        <p>Hai totalizzato <span className="yellow-marker">{state.score && state.score}</span> punti</p>
+        <p>Hai totalizzato <span className="yellow-marker">{location?.state?.score}</span> punti</p>
         <div className="button-container">
           <Button
             label={'Restart'}

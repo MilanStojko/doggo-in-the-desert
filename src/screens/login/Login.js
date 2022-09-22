@@ -29,7 +29,6 @@ function Login() {
   function submit(){
 
     let playersList = JSON.parse(localStorage.getItem('players')) || []
-    let check = false
 
     playersList.map((element) => {
       if(element.username === state.player.username && element.password === state.player.password){
