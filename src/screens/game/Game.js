@@ -21,7 +21,6 @@ function Game() {
   const GAME_WIDTH = window.innerWidth;
   const GRAVITY = 6;
   const JUMP = 180;
-  const BALK_WIDTH = 100;
   const FOODBALK_ARR = [
     {
       img: rock,
@@ -89,17 +88,20 @@ function Game() {
     obastacle: FOODBALK_ARR[0].obastacle,
     position: FOODBALK_ARR[0].position,
   });
+  const [display, setDisplay] = useState(true);
   const [doggoState, setDoggoState] = useState(GAME_HEIGHT - DOGGO_HEIGHT);
   const [jumping, setjumping] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  // const [balkHeight, setBalkHeight] = useState(FOODBALK_ARR[0].height);
-  // const [balkImg, setBalkImg] = useState(FOODBALK_ARR[0].img);
-  // const [balkWidth, setBalkWidth] = useState(FOODBALK_ARR[0].width);
   const [balkLeft, setBalkLeft] = useState(GAME_WIDTH - foodBalk.width);
   const [score, setScore] = useState(0);
 
   let incrementScore = 0;
   let navigate = useNavigate();
+
+  useEffect(() => {
+    increment();
+    setScore((score) => score + incrementScore);
+  }, [display]);
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
@@ -112,34 +114,68 @@ function Game() {
         setDoggoState((doggoState) => doggoState + GRAVITY);
       }, 24);
     }
+    let elementDog = {
+      x: doggoState,
+      y: 0,
+      w: DOGGO_WIDTH,
+      h: DOGGO_HEIGHT,
+    };
+
+    let elementFoodBalk = {
+      x: GAME_HEIGHT - foodBalk.height - foodBalk.position,
+      y: balkLeft,
+      w: foodBalk.width,
+      h: foodBalk.height,
+    };
+    let gameEnd = gameStarted;
+    // let collided = doggoState >= GAME_HEIGHT - foodBalk.height;
+    let collided = checkCollide();
+    function checkCollide() {
+      if (
+        elementDog.x < elementFoodBalk.x + elementFoodBalk.w &&
+        elementDog.x + elementDog.w > elementFoodBalk.x &&
+        elementDog.y < elementFoodBalk.y + elementFoodBalk.h &&
+        elementDog.h + elementDog.y > elementFoodBalk.y
+      ) {
+        return true;
+      }
+      return false;
+    }
+    if (collided && foodBalk.obastacle === true) {
+      gameEnd = false;
+      // navigate(SCREENS.result);
+    } else if (collided && foodBalk.obastacle === false) {
+      setDisplay(false);
+    }
+    console.log(score, "nello score");
+    setGameStarted(gameEnd);
+    let balkId;
+    if (gameStarted && balkLeft >= -foodBalk.width) {
+      balkId = setInterval(() => {
+        setBalkLeft((balkLeft) => balkLeft - 8);
+      }, 24);
+    } else {
+      let newBalk = FOODBALK_ARR[~~(Math.random() * FOODBALK_ARR.length)];
+      setFoodBalk({
+        img: newBalk.img,
+        width: newBalk.width,
+        height: newBalk.height,
+        score: newBalk.score,
+        obastacle: newBalk.obastacle,
+        position: newBalk.position,
+      });
+      setDisplay(true);
+      setBalkLeft(GAME_WIDTH - foodBalk.width);
+    }
     return () => {
       clearInterval(timeId);
+      clearInterval(balkId);
     };
-  }, [doggoState, gameStarted]);
-
-  useEffect(() => {
-    let gameEnd = gameStarted;
-    let collided = doggoState >= GAME_HEIGHT - foodBalk.height;
-    if (
-      balkLeft >= 0 &&
-      balkLeft <= DOGGO_WIDTH &&
-      collided &&
-      foodBalk.obastacle === true
-    ) {
-      gameEnd = false;
-      navigate(SCREENS.result);
-    } else if (
-      balkLeft >= 0 &&
-      balkLeft <= DOGGO_WIDTH &&
-      collided &&
-      foodBalk.obastacle === false
-    ) {
-      incrementScore = incrementScore + foodBalk.score;
-    }
-    setScore((score) => score + incrementScore);
-    setGameStarted(gameEnd);
-    console.log(score, "nello score");
   }, [balkLeft, gameStarted, doggoState]);
+
+  function increment() {
+    incrementScore = foodBalk.score;
+  }
 
   function handleClick() {
     let newDoggoPosition = doggoState;
@@ -156,32 +192,6 @@ function Game() {
     setDoggoState(newDoggoPosition);
   }
 
-  useEffect(() => {
-    let balkId;
-    if (gameStarted && balkLeft >= -foodBalk.width) {
-      balkId = setInterval(() => {
-        setBalkLeft((balkLeft) => balkLeft - 8);
-      }, 24);
-    } else {
-      let newBalk = FOODBALK_ARR[~~(Math.random() * FOODBALK_ARR.length)];
-      // setBalkImg(newBalk.img);
-      // setBalkHeight(newBalk.height);
-      // setBalkWidth(newBalk.width);
-      setFoodBalk({
-        img: newBalk.img,
-        width: newBalk.width,
-        height: newBalk.height,
-        score: newBalk.score,
-        obastacle: newBalk.obastacle,
-        position: newBalk.position,
-      });
-      setBalkLeft(GAME_WIDTH - foodBalk.width);
-    }
-    return () => {
-      clearInterval(balkId);
-    };
-  }, [balkLeft, gameStarted]);
-
   return (
     <div className="bg-container">
       <div className="layer layer-04"></div>
@@ -190,7 +200,11 @@ function Game() {
       <div className="layer layer-01"></div>
       <div
         className="doggo"
-        style={{ top: doggoState + "px", transition: "all .1s ease-out" }}
+        style={{
+          top: doggoState + "px",
+          transition: "all .1s ease-out",
+          left: 0,
+        }}
       >
         <img
           className="doggo_img"
@@ -198,16 +212,18 @@ function Game() {
           alt="dog"
         />
       </div>
-      <div
-        className="balk"
-        style={{
-          top: GAME_HEIGHT - foodBalk.height,
-          height: foodBalk.height,
-          width: foodBalk.width,
-          left: balkLeft,
-          backgroundImage: `url(${foodBalk.img})`,
-        }}
-      ></div>
+      {display && (
+        <div
+          className="balk"
+          style={{
+            top: GAME_HEIGHT - foodBalk.height - foodBalk.position,
+            height: foodBalk.height,
+            width: foodBalk.width,
+            left: balkLeft,
+            backgroundImage: `url(${foodBalk.img})`,
+          }}
+        ></div>
+      )}
       <div className="street"></div>
     </div>
   );
