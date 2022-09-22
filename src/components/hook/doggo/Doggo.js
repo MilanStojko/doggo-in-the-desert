@@ -7,7 +7,6 @@ function Doggo(props) {
         className="doggo_img"
         src={require("../../../assets/images/spritesheet.png")}
         alt="dog"
-        style={{ top: props.position + "px" }}
       />
     </div>
   );

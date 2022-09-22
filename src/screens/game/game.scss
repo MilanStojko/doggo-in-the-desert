@@ -48,14 +48,27 @@
   background-color: $yellow;
   width: 100vw;
 }
+@keyframes doggo {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
 .doggo {
   position: absolute;
-  background-color: black;
-  height: 72px;
   width: 100px;
-  border-radius: 50%;
+  height: 72px;
+  overflow: hidden;
   z-index: 99;
+  .doggo_img {
+    animation: doggo 0.7s steps(10) infinite;
+    height: 72px;
+    max-width: auto;
+  }
 }
+
 .balk {
   position: relative;
   background-size: contain;
