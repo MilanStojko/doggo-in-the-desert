@@ -13,7 +13,7 @@ function Game() {
   const GAME_WIDTH = window.innerWidth;
   const GRAVITY = 6;
   const JUMP = 180;
-  const BALK_WIDTH = 101;
+  const BALK_WIDTH = 100;
   const BALK_ARR = [
     {
       img: rock,
@@ -32,9 +32,13 @@ function Game() {
   const [doggoState, setDoggoState] = useState(GAME_HEIGHT - DOGGO_HEIGHT);
   const [jumping, setjumping] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  const [balkHeight, setBalkHeight] = useState(BALK_ARR[0].height);
-  const [balkImg, setBalkImg] = useState(BALK_ARR[0].img);
+  const [balkHeight, setBalkHeight] = useState(BALK_ARR[1].height);
+  const [balkImg, setBalkImg] = useState(BALK_ARR[1].img);
   const [balkLeft, setBalkLeft] = useState(GAME_WIDTH - BALK_WIDTH);
+
+  useEffect(() => {
+    document.addEventListener('click', handleClick)
+  }, [])
 
   useEffect(() => {
     let timeId;
@@ -44,7 +48,6 @@ function Game() {
       }, 24);
     }
     console.log(doggoState, "doggo nel effect");
-    handleClick();
     return () => {
       clearInterval(timeId);
     };
@@ -90,12 +93,12 @@ function Game() {
   }, [balkLeft, gameStarted]);
 
   return (
-    <div className="bg-container" onClick={handleClick}>
+    <div className="bg-container">
       <div className="layer layer-04"></div>
       <div className="layer layer-03"></div>
       <div className="layer layer-02"></div>
       <div className="layer layer-01"></div>
-      <div className="doggo" style={{ top: doggoState + "px" }}></div>
+      <div className="doggo" style={{ top: doggoState + "px", transition: 'all .1s ease-out' }}></div>
       <div
         className="balk"
         style={{
