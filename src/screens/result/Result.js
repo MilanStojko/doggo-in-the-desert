@@ -27,7 +27,7 @@ function Result() {
 
   return(
     <div className="result">
-
+      
       <section>
         <h1>Game over</h1>
         <p>Hai totalizzato <span className="yellow-marker">{location?.state?.score}</span> punti</p>
