@@ -20,9 +20,11 @@ function Home() {
         goToLogin();
       }
     });
+    document.addEventListener("click", goToLogin);
     soundPlay.soundPlay(homemp3, 0.3, true, true);
     return () => {
       document.removeEventListener("keydown", goToLogin);
+      document.removeEventListener("click", goToLogin);
     };
   }, []);
 
