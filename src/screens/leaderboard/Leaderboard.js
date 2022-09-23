@@ -25,7 +25,9 @@ function Leaderboard() {
 
         <ul>
           {rank.length > 0 ? (
-            rank.map((element, key) => {
+            rank
+            .sort((a, b) => a.score > b.score ? -1 : 1)
+            .map((element, key) => {
               return (
                 <li key={key}>
                   {element.username}: {element.score}

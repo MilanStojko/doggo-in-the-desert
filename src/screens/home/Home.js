@@ -15,8 +15,10 @@ function Home() {
 
   useEffect(() => {
     document.addEventListener('keydown', goToLogin)
+    document.addEventListener('click', goToLogin)
     return() =>{
       document.removeEventListener('keydown', goToLogin)
+      document.removeEventListener('click', goToLogin)
     }
   }, [])
 

@@ -256,15 +256,7 @@ function Tutorial() {
       <Button
         label={"PLAY!"}
         callBackClick={goToGame}
-        objCss={{
-          backgroundColor: "#ffcd4f",
-          color: "#000",
-          border: "1px #ffcd4f solid",
-          fontSize: "16px",
-          padding: "10px 20px",
-          borderRadius: "3px",
-          margin: "0 5px",
-        }}
+        classCss={'primary'}
       />
     </div>
   );

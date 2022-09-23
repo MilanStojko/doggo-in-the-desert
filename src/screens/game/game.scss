@@ -66,8 +66,6 @@
 }
 .doggo {
   position: absolute;
-  // width: 100px;
-  // height: 72px;
   overflow: hidden;
   z-index: 99;
   .doggo_img {
@@ -82,7 +80,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 99;
-  border: 1px solid black;
 }
 
 .stats {
