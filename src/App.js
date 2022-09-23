@@ -13,6 +13,9 @@ import Signup from './screens/signup/Signup';
 import Tutorial from './screens/tutorial/Tutorial';
 
 function App() {
+
+  // screen.orientation.lock('landscape-primary')
+
   return (
     <div>
       <Routes>

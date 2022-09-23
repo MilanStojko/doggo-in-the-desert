@@ -32,6 +32,7 @@ function Game() {
   const [gameStarted, setGameStarted] = useState(false);
   const [balkLeft, setBalkLeft] = useState(GAME_WIDTH - foodBalk.width);
   const [score, setScore] = useState(0);
+  const [angrymeter, setAngrymeter] = useState(0)
 
   let incrementScore = 0;
   let navigate = useNavigate();
@@ -41,6 +42,7 @@ function Game() {
       increment();
       setScore((score) => score + incrementScore);
     }
+    setAngrymeter(score * 5)
   }, [display]);
 
   function increment() {
@@ -142,7 +144,19 @@ function Game() {
         <div className="stats">
           <p>Doggo in the desert</p>
           <p>{score}</p>
-          <p>angrymeter : {score * 5}</p>
+          <p>angrymeter : {angrymeter}</p>
+        </div>
+
+        <div className="cleopatra">
+          {
+            angrymeter <= 25
+            ? <img src={require('../../assets/images/cleopa1.png')}/>
+            : angrymeter <= 50
+            ? <img src={require('../../assets/images/cleopa2.png')}/>
+            : angrymeter <= 100
+            ? <img src={require('../../assets/images/cleopa3.png')}/>
+            : <img src={require('../../assets/images/cleopa4.png')}/>
+          }
         </div>
 
         <div

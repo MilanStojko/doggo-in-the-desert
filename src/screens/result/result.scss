@@ -18,6 +18,7 @@
 section.section-cat{
     justify-content: flex-end;
     .cat-game-over{
+        width: 30vw;
         margin-bottom: -20px;
     }
 }
@@ -32,5 +33,13 @@ section.section-cat{
     display: flex;
     .btn{
         margin: 10px;
+    }
+}
+
+@media(min-width: 1050px){
+    section.section-cat{
+        .cat-game-over{
+            margin-bottom: -50px;
+        }
     }
 }
