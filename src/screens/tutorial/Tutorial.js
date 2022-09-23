@@ -193,7 +193,8 @@ function Tutorial() {
       {phase === 4 && (
         <div className="mile">
           <h2>
-            HERE YOU CAN SEE YOUR SCORE AND FOR HOW LONG YOU'VE BEEN PLAYING
+            AT THE TOP OF YOUR SCREEN YOU CAN SEE YOUR SCORE AND HOW MUCH YOU
+            ANNOYED CLEOPATRA SO FAR
             <br></br>
             <br></br>
             YOU ARE NOW READY TO TAKE ON THIS INCREDIBLY ANNOYING QUEST, GOOD
@@ -205,15 +206,7 @@ function Tutorial() {
           <Button
             label={"PLAY!"}
             callBackClick={goToGame}
-            objCss={{
-              backgroundColor: "#ffcd4f",
-              color: "#000",
-              border: "1px #ffcd4f solid",
-              fontSize: "16px",
-              padding: "10px 20px",
-              borderRadius: "3px",
-              margin: "0 5px",
-            }}
+            classCss={"primary"}
           />
         </div>
       )}
