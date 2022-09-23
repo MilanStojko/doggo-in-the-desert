@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 import SCREENS from "../../route/router";
 import responsive from "../../events/responsive";
+import soundPlay from "../../events/soundPlay";
 import elements from "../../utils/elements";
+
+import jumpmp3 from '../../assets/sounds/jump.mp3'
+import hitmp3 from '../../assets/sounds/hit.mp3'
+import eatmp3 from '../../assets/sounds/eat.mp3'
 
 import "./game.scss";
 
@@ -41,6 +46,7 @@ function Game() {
     if (!display) {
       increment();
       setScore((score) => score + incrementScore);
+      soundPlay.soundPlay(eatmp3, 0.5)
     }
     setAngrymeter(score * 5);
   }, [display]);
@@ -88,6 +94,7 @@ function Game() {
       return true;
     }
     if (collided && foodBalk.obastacle === true) {
+      soundPlay.soundPlay(hitmp3, 0.5)
       gameEnd = false;
       navigate(SCREENS.result, { state: { score: score } });
     } else if (collided && foodBalk.obastacle === false) {
@@ -131,6 +138,7 @@ function Game() {
     }
     setjumping(handleJumping);
     setDoggoState(newDoggoPosition);
+    soundPlay.soundPlay(jumpmp3, 0.5)
   }
 
   return (
@@ -192,6 +200,7 @@ function Game() {
         )}
         <div className="street"></div>
       </div>
+
     </div>
   );
 }
