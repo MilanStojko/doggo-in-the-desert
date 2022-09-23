@@ -1,59 +1,80 @@
-import { useState } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import SCREENS from "../../route/router"
-import Button from "../../components/ui/button/Button"
+import SCREENS from "../../route/router";
+import Button from "../../components/ui/button/Button";
 
-import './result.scss'
+import "./result.scss";
 
 function Result() {
-  let navigate = useNavigate()
-  const location = useLocation()
+  let navigate = useNavigate();
+  const location = useLocation();
+  let storedPlayers = JSON.parse(localStorage.getItem("players")) || [];
+  let sessionPlayer = JSON.parse(sessionStorage.getItem("player")) || [];
 
-  function goToHome(){
-    navigate(SCREENS.home)
+  sessionPlayer.score = location.state.score;
+  sessionStorage.setItem("player", JSON.stringify(sessionPlayer));
+
+  function setNewScore() {
+    storedPlayers.map((element) => {
+      if (element.username === sessionPlayer.username) {
+        element.score = element.score + sessionPlayer.score;
+      }
+    });
+    localStorage.setItem("players", JSON.stringify(storedPlayers));
   }
 
-  function goToGame(){
-    navigate(SCREENS.game)
+  function goToHome() {
+    sessionStorage.clear();
+    navigate(SCREENS.home);
   }
 
-  function goToLeaderboard(){
-    navigate(SCREENS.leaderboard)
+  function goToGame() {
+    navigate(SCREENS.game);
   }
-  
-  return(
+
+  function goToLeaderboard() {
+    navigate(SCREENS.leaderboard);
+    setNewScore();
+  }
+
+  return (
     <div className="result">
-      
       <section>
         <h1>Game over</h1>
-        <p>Hai totalizzato <span className="yellow-marker">{location?.state?.score}</span> punti</p>
+        <p>
+          Hai totalizzato{" "}
+          <span className="yellow-marker">{location?.state?.score}</span> punti
+        </p>
         <div className="button-container">
           <Button
-            label={'Restart'}
+            label={"Restart"}
             callBackClick={goToGame}
-            classCss={'primary'}
+            classCss={"primary"}
           />
           <Button
-            label={'Rank'}
+            label={"Rank"}
             callBackClick={goToLeaderboard}
-            classCss={'secondary'}
+            classCss={"secondary"}
           />
         </div>
 
         <Button
-          label={'Logout'}
+          label={"Logout"}
           callBackClick={goToHome}
-          classCss={'tertiary'}
+          classCss={"tertiary"}
         />
       </section>
 
       <section className="section-cat">
-        <img className="cat-game-over" src={require("../../assets/images/cat-game-over.png")} alt="cat" />
+        <img
+          className="cat-game-over"
+          src={require("../../assets/images/cat-game-over.png")}
+          alt="cat"
+        />
       </section>
-
     </div>
-  )
+  );
 }
 
-export default Result
+export default Result;

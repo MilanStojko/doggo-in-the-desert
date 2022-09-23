@@ -1,20 +1,21 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import SCREENS from "../../route/router"
-import Button from "../../components/ui/button/Button"
+import SCREENS from "../../route/router";
+import Button from "../../components/ui/button/Button";
 
-import "./leaderboard.scss"
+import "./leaderboard.scss";
 
 function Leaderboard() {
-  let navigate = useNavigate()
-  let rank = JSON.parse(localStorage.getItem("players")) || []
+  let navigate = useNavigate();
+  let rank = JSON.parse(localStorage.getItem("players")) || [];
 
   function goToHome() {
-    navigate(SCREENS.home)
+    sessionStorage.clear();
+    navigate(SCREENS.home);
   }
   function goToGame() {
-    navigate(SCREENS.game)
+    navigate(SCREENS.game);
   }
 
   return (
@@ -29,7 +30,7 @@ function Leaderboard() {
                 <li key={key}>
                   {element.username}: {element.score}
                 </li>
-              )
+              );
             })
           ) : (
             <p>No results available</p>
@@ -40,12 +41,12 @@ function Leaderboard() {
           <Button
             label={"Restart"}
             callBackClick={goToGame}
-            classCss={'primary'}
+            classCss={"primary"}
           />
           <Button
             label={"Logout"}
             callBackClick={goToHome}
-            classCss={'secondary'}
+            classCss={"secondary"}
           />
         </div>
       </section>
@@ -58,7 +59,7 @@ function Leaderboard() {
         />
       </section>
     </div>
-  )
+  );
 }
 
-export default Leaderboard
+export default Leaderboard;

@@ -1,70 +1,69 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Button from "../../components/ui/button/Button"
-import InputBox from "../../components/ui/inputBox/InputBox"
-import SCREENS from "../../route/router"
+import Button from "../../components/ui/button/Button";
+import InputBox from "../../components/ui/inputBox/InputBox";
+import SCREENS from "../../route/router";
 
 function Signup() {
   const [state, setState] = useState({
     player: {
-      username: '',
-      password: '',
-      score: 0
+      username: "",
+      password: "",
+      score: 0,
     },
     alertActive: false,
-    checkPassword: true
+    checkPassword: true,
+  });
+  let navigate = useNavigate();
 
-  })
-  let navigate = useNavigate()
-
-  function reset(){
+  function reset() {
     setState({
       ...state,
-      alertActive: false
-    })
+      alertActive: false,
+    });
   }
 
-  function getUsername(e){
-    state.player.username = e.target.value
+  function getUsername(e) {
+    state.player.username = e.target.value;
   }
-  function getPassword(e){
-    state.player.password = e.target.value
+  function getPassword(e) {
+    state.player.password = e.target.value;
   }
-  function checkPassword(e){
+  function checkPassword(e) {
     e.target.value === state.player.password
-    ? setState({...state, checkPassword: true})
-    : setState({...state, checkPassword: false})
+      ? setState({ ...state, checkPassword: true })
+      : setState({ ...state, checkPassword: false });
   }
 
-  function goToLogin(){
-    navigate(SCREENS.login)
+  function goToLogin() {
+    navigate(SCREENS.login);
   }
 
-  function submit(){
-    let playersList = JSON.parse(localStorage.getItem('players')) || []
-    let check = false
+  function submit() {
+    let playersList = JSON.parse(localStorage.getItem("players")) || [];
+    let check = false;
 
     playersList.map((element) => {
-      if(element.username === state.player.username){
-        check = true
+      if (element.username === state.player.username) {
+        check = true;
         setState({
           ...state,
           alertActive: true,
-        })
+        });
       }
-    })
+    });
 
-    if(!check && state.checkPassword){
-      playersList.push(state.player)
-      navigate(SCREENS.tutorial)
+    if (!check && state.checkPassword) {
+      playersList.push(state.player);
+      navigate(SCREENS.tutorial);
     }
-    localStorage.setItem('players', JSON.stringify(playersList))
+    localStorage.setItem("players", JSON.stringify(playersList));
+    sessionStorage.setItem("player", JSON.stringify(state.player));
   }
 
   return (
     <div className="signup">
-
       <section>
         <h1>Signup</h1>
 
@@ -73,7 +72,7 @@ function Signup() {
             placeholder={"username"}
             callBackChange={getUsername}
             callBackClick={reset}
-            />
+          />
           <InputBox
             type={"password"}
             placeholder={"password"}
@@ -88,35 +87,36 @@ function Signup() {
             callBackClick={reset}
           />
 
-          {
-            !state.checkPassword &&
+          {!state.checkPassword && (
             <p className="alertActive">Password must be equal</p>
-          }
+          )}
 
-          {
-            state.alertActive &&
+          {state.alertActive && (
             <div className="alertActive">This user already exists</div>
-          }
+          )}
 
           <Button
-            label={'Sign up'}
+            label={"Sign up"}
             callBackClick={submit}
-            classCss={'primary'}
+            classCss={"primary"}
           />
         </form>
 
         <Button
           label={"or Login"}
-          classCss={'tertiary'}
+          classCss={"tertiary"}
           callBackClick={goToLogin}
         />
       </section>
 
       <section>
-        <img className="cover-login" src={require("../../assets/images/sphinx.png")} alt="" />
+        <img
+          className="cover-login"
+          src={require("../../assets/images/sphinx.png")}
+          alt=""
+        />
       </section>
-
     </div>
-  )
+  );
 }
-export default Signup
+export default Signup;
