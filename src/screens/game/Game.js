@@ -37,9 +37,15 @@ function Game() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    increment();
-    setScore((score) => score + incrementScore);
+    if (!display) {
+      increment();
+      setScore((score) => score + incrementScore);
+    }
   }, [display]);
+
+  function increment() {
+    incrementScore = foodBalk.score;
+  }
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
@@ -110,10 +116,6 @@ function Game() {
     };
   }, [balkLeft, gameStarted, doggoState]);
 
-  function increment() {
-    incrementScore = foodBalk.score;
-  }
-
   function handleClick() {
     let newDoggoPosition = doggoState;
     let handleJumping = true;
@@ -140,7 +142,7 @@ function Game() {
         <div className="stats">
           <p>Doggo in the desert</p>
           <p>{score}</p>
-          <p>secondi</p>
+          <p>angrymeter : {score * 5}</p>
         </div>
 
         <div

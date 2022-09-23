@@ -1,15 +1,13 @@
-import { useEffect, useState, setState, useSyncExternalStore } from "react";
+import { useEffect, useState, setState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SCREENS from "../../route/router";
 import responsive from "../../events/responsive";
 import elements from "../../utils/elements";
 
-import Button from "../../components/ui/button/Button";
+import "./game.scss";
 
-import "./tutorial.scss";
-
-function Tutorial() {
+function Game() {
   let getResponsive = responsive.handleResponsive();
   const DOGGO_HEIGHT = 72 * getResponsive;
   const DOGGO_WIDTH = 100 * getResponsive;
@@ -17,9 +15,9 @@ function Tutorial() {
   const GAME_WIDTH = window.innerWidth;
   const GRAVITY = 6 * getResponsive;
   const SPEED = 13 * getResponsive;
+  const JUMP = 210 * getResponsive;
   const FOODBALK_ARR = elements;
 
-  const [phase, setPhase] = useState(1);
   const [foodBalk, setFoodBalk] = useState({
     img: FOODBALK_ARR[0].img,
     width: FOODBALK_ARR[0].width,
@@ -38,18 +36,20 @@ function Tutorial() {
   let incrementScore = 0;
   let navigate = useNavigate();
 
-  function goToGame() {
-    navigate(SCREENS.game);
-  }
+  useEffect(() => {
+    if (!display) {
+      increment();
+      setScore((score) => score + incrementScore);
+    }
+  }, [display]);
 
-  function nextStep() {
-    setPhase((phase) => phase + 1);
+  function increment() {
+    incrementScore = foodBalk.score;
   }
 
   useEffect(() => {
-    increment();
-    setScore((score) => score + incrementScore);
-  }, [display]);
+    document.addEventListener("click", handleClick);
+  }, []);
 
   useEffect(() => {
     let timeId;
@@ -87,11 +87,10 @@ function Tutorial() {
     }
     if (collided && foodBalk.obastacle === true) {
       gameEnd = false;
-      // navigate(SCREENS.result);
+      navigate(SCREENS.result, { state: { score: score } });
     } else if (collided && foodBalk.obastacle === false) {
       setDisplay(false);
     }
-    console.log(score, "nello score");
     setGameStarted(gameEnd);
     let balkId;
     if (gameStarted && balkLeft >= -foodBalk.width) {
@@ -100,6 +99,7 @@ function Tutorial() {
       }, 24);
     } else {
       let newBalk = FOODBALK_ARR[~~(Math.random() * FOODBALK_ARR.length)];
+      setDisplay(true);
       setFoodBalk({
         img: newBalk.img,
         width: newBalk.width,
@@ -108,7 +108,6 @@ function Tutorial() {
         obastacle: newBalk.obastacle,
         position: newBalk.position,
       });
-      setDisplay(true);
       setBalkLeft(GAME_WIDTH - foodBalk.width);
     }
     return () => {
@@ -117,149 +116,70 @@ function Tutorial() {
     };
   }, [balkLeft, gameStarted, doggoState]);
 
-  function increment() {
-    incrementScore = foodBalk.score;
+  function handleClick() {
+    let newDoggoPosition = doggoState;
+    let handleJumping = true;
+    setGameStarted(true);
+    if (!jumping) {
+      newDoggoPosition = doggoState - JUMP;
+      handleJumping = true;
+    }
+    if (doggoState === GAME_HEIGHT - DOGGO_HEIGHT && jumping) {
+      handleJumping = false;
+    }
+    setjumping(handleJumping);
+    setDoggoState(newDoggoPosition);
   }
 
   return (
-    <div className="bg-container tutorial" onClick={nextStep}>
-      {phase === 1 && (
-        <div className="mile mile1">
-          <h1>WELCOME TO DOGGO IN THE DESERT!!</h1>
-          <br></br>
-          <h2>
-            THIS IS THE TUTORIAL, YOU CAN SKIP IT AT ANY MOMENT JUST BY PRESSIN
-            THE BUTTON THAT YOU CAN FIND IN THE BOTTOM-RIGHT CORNER OF YOU
-            SCREEN
-          </h2>
-          <br></br>
-          <h2> TO CONTINUE THE TUTORIAL, PRESS ANYWHERE ON YOU SCREEN</h2>
-        </div>
-      )}
-      {phase === 2 && (
-        <div className="mile mile2">
-          <div className="food-container">
-            {FOODBALK_ARR.map((element, key) => {
-              return (
-                element.obastacle === false && (
-                  <div className={"legend"} key={key}>
-                    <img src={element.img} />
-                    <p> + {element.score}</p>
-                  </div>
-                )
-              );
-            })}
-          </div>
-          <h2>
-            YOUR GOAL IS TO ANNOY CLEOPATRA AS MUCH AS YOU CAN BY PICKING UP
-            FOOD
-            <br></br>
-            <br></br>
-            THE TEASTIER THE FOOD, THE BETTER THE ANNOYMENT
-            <br></br>
-            <br></br>
-            EACH TYPE OF FOOD HAS HIS OWN ANNOYING POWER, TO EAT THEM, YOU'LL
-            NEED TO JUMP AND CATCH THEM
-          </h2>
-        </div>
-      )}
-      {phase === 3 && (
-        <div className="mile mile2">
-          <div className="food-container">
-            {FOODBALK_ARR.map((element, key) => {
-              return (
-                element.obastacle === true && (
-                  <div className={"legend obstacles"} key={key}>
-                    <img src={element.img} />
-                  </div>
-                )
-              );
-            })}
-          </div>
-          <h2>
-            THIS ARE THE ONLY OBSTACLES THAT WILL TRY TO DISTRUPT YOUR BRAVE
-            QUEST
-            <br></br>
-            <br></br>
-            IN ORDER TO AVOID THEM YOU'LL NEED TO JUMP BY PRESSING ANYWHERE ON
-            YOUR SCREEN
-            <br></br>
-            <br></br>
-            BUT BEWEARE, NOT ALL OBSTACLES ARE HIGH THE SAME, IN SOME CASES
-            YOU'LL NEED TO TRY TO FLY
-          </h2>
-        </div>
-      )}
-      {phase === 4 && (
-        <div className="mile">
-          <h2>
-            HERE YOU CAN SEE YOUR SCORE AND FOR HOW LONG YOU'VE BEEN PLAYING
-            <br></br>
-            <br></br>
-            YOU ARE NOW READY TO TAKE ON THIS INCREDIBLY ANNOYING QUEST, GOOD
-            LUCK AND HAVE FUN!
-            <br></br>
-            <br></br>
-          </h2>
+    <div className="game">
+      <div className="bg-container">
+        <div className="layer layer-04"></div>
+        <div className="layer layer-03"></div>
+        <div className="layer layer-02"></div>
+        <div className="layer layer-01"></div>
 
-          <Button
-            label={"PLAY!"}
-            callBackClick={goToGame}
-            objCss={{
-              backgroundColor: "#ffcd4f",
-              color: "#000",
-              border: "1px #ffcd4f solid",
-              fontSize: "16px",
-              padding: "10px 20px",
-              borderRadius: "3px",
-              margin: "0 5px",
+        <div className="stats">
+          <p>Doggo in the desert</p>
+          <p>{score}</p>
+          <p>angrymeter : {score * 5}</p>
+        </div>
+
+        <div
+          className="doggo"
+          style={{
+            top: doggoState + "px",
+            transition: "all .1s ease-out",
+            left: 0,
+            height: DOGGO_HEIGHT,
+            width: DOGGO_WIDTH,
+          }}
+        >
+          <img
+            className="doggo_img"
+            src={require("../../assets/images/spritesheet.png")}
+            alt="dog"
+            style={{
+              height: DOGGO_HEIGHT,
             }}
           />
         </div>
-      )}
-      <div className="layer layer-04"></div>
-      <div className="layer layer-03"></div>
-      <div className="layer layer-02"></div>
-      <div className="layer layer-01"></div>
-      <div className={`stats ${phase === 4 && "stats-active"}`}>
-        <p>Doggo in the desert</p>
-        <p>{score}</p>
-        <p>secondi</p>
+        {display && (
+          <div
+            className="balk"
+            style={{
+              top: GAME_HEIGHT - foodBalk.height - foodBalk.position,
+              height: foodBalk.height,
+              width: foodBalk.width,
+              left: balkLeft,
+              backgroundImage: `url(${foodBalk.img})`,
+            }}
+          ></div>
+        )}
+        <div className="street"></div>
       </div>
-      <div
-        className="doggo"
-        style={{
-          top: doggoState + "px",
-          transition: "all .1s ease-out",
-          left: 0,
-        }}
-      >
-        <img
-          className="doggo_img"
-          src={require("../../assets/images/spritesheet.png")}
-          alt="dog"
-        />
-      </div>
-      {display && (
-        <div
-          className="balk"
-          style={{
-            top: GAME_HEIGHT - foodBalk.height - foodBalk.position,
-            height: foodBalk.height,
-            width: foodBalk.width,
-            left: balkLeft,
-            backgroundImage: `url(${foodBalk.img})`,
-          }}
-        ></div>
-      )}
-      <div className="street"></div>
-      <Button
-        label={"PLAY!"}
-        callBackClick={goToGame}
-        classCss={'primary'}
-      />
     </div>
   );
 }
 
-export default Tutorial;
+export default Game;
