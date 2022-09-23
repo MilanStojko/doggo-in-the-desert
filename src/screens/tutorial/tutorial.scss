@@ -1,0 +1,153 @@
+@import "./../../style/common.scss";
+// ----------------- PARALLAX ------------------
+
+@keyframes moving-img {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: -99999px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.layer {
+  height: calc(100vh - 8vh);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  &.layer-04 {
+    background: url("../../assets/images/04-layer.png") repeat-x;
+    animation: moving-img 20000s linear infinite;
+    background-size: auto 100%;
+  }
+  &.layer-03 {
+    background: url("../../assets/images/03-layer.png") repeat-x;
+    animation: moving-img 10000s linear infinite;
+    background-size: auto 100%;
+  }
+  &.layer-02 {
+    background: url("../../assets/images/02-layer.png") repeat-x;
+    animation: moving-img 6000s linear infinite;
+    background-size: auto 100%;
+  }
+  &.layer-01 {
+    background: url("../../assets/images/01-layer.png") repeat-x;
+    animation: moving-img 3000s linear infinite;
+    background-size: auto 100%;
+  }
+}
+.street {
+  position: absolute;
+  bottom: 0;
+  height: 8vh;
+  background: rgb(219, 82, 19);
+  background: linear-gradient(
+    0deg,
+    rgba(219, 82, 19, 1) 0%,
+    rgba(223, 90, 22, 1) 35%,
+    rgba(231, 106, 30, 1) 85%,
+    rgba(238, 120, 36, 1) 100%
+  );
+
+  width: 100vw;
+}
+@keyframes doggo {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.doggo {
+  position: absolute;
+  width: 100px;
+  height: 72px;
+  overflow: hidden;
+  z-index: 99;
+
+  .doggo_img {
+    animation: doggo 0.7s steps(10) infinite;
+    height: 72px;
+    max-width: auto;
+  }
+}
+
+.balk {
+  position: relative;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 99;
+}
+
+.stats {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $purple;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  p {
+    width: 150px;
+    text-align: center;
+    &:first-child,
+    &:last-child {
+      font-size: 12px;
+    }
+  }
+  &.stats-active {
+    z-index: 101;
+  }
+}
+.mile {
+  height: 100vh;
+  width: 100vw;
+  z-index: 100;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 10px;
+  color: white;
+  text-align: center;
+}
+.mile1 {
+  h1 {
+    font-size: 2rem;
+  }
+}
+.mile2 {
+  .food-container {
+    padding-bottom: 50px;
+    justify-content: space-around;
+    width: 100vw;
+    display: flex;
+    .legend {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 1.5rem;
+      img {
+        height: 40px;
+        margin-right: 10px;
+        width: auto;
+      }
+    }
+    .obstacles {
+      img {
+        height: 70px !important;
+      }
+    }
+  }
+}
