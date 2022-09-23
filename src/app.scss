@@ -45,6 +45,13 @@ h1{
   height: 100vh;
   width: 100vw;
   background-color: $purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1{
+    color: white;
+    font-size: 2rem;
+  }
 }
 
 @media(min-width: 1050px){
