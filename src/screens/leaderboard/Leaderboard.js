@@ -40,28 +40,12 @@ function Leaderboard() {
           <Button
             label={"Restart"}
             callBackClick={goToGame}
-            objCss={{
-              backgroundColor: "#ffcd4f",
-              color: "#000",
-              border: "1px #ffcd4f solid",
-              fontSize: "16px",
-              padding: "10px 20px",
-              borderRadius: "3px",
-              margin: "0 5px",
-            }}
+            classCss={'primary'}
           />
           <Button
             label={"Logout"}
             callBackClick={goToHome}
-            objCss={{
-              backgroundColor: "transparent",
-              color: "#fff",
-              border: "1px #ffcd4f solid",
-              fontSize: "16px",
-              padding: "10px 20px",
-              borderRadius: "3px",
-              margin: "0 5px",
-            }}
+            classCss={'secondary'}
           />
         </div>
       </section>
