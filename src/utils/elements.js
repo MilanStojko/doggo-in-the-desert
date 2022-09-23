@@ -43,20 +43,20 @@ const elements = [
     position: 80 * getResponsive,
   },
   {
-    img: steak,
-    width: 60 * getResponsive,
-    height: 40 * getResponsive,
-    score: 3,
-    obastacle: false,
-    position: 130 * getResponsive,
-  },
-  {
     img: cookie,
     width: 40 * getResponsive,
     height: 40 * getResponsive,
     score: 2,
     obastacle: false,
     position: 105 * getResponsive,
+  },
+  {
+    img: steak,
+    width: 60 * getResponsive,
+    height: 40 * getResponsive,
+    score: 3,
+    obastacle: false,
+    position: 130 * getResponsive,
   },
   {
     img: bruxellessprout,
