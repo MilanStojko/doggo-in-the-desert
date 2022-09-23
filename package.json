@@ -13,6 +13,7 @@
     "react-howler": "^5.2.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.0",
+    "react-screen-orientation": "^0.0.4",
     "react-scripts": "5.0.1",
     "react-use-audio-player": "^1.2.6",
     "sass": "^1.54.9",
