@@ -1,0 +1,27 @@
+@import '../../../style/common.scss';
+
+@keyframes rotate-dog{
+  0%{ transform: rotate(0); }
+  25%{ transform: rotate(90deg); }
+  30%{ transform: rotate(0); }
+  100%{ transform: rotate(0); }
+}
+
+.portrait-view{
+    height: 100vh;
+    width: 100vw;
+    background-color: $purple;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h1{
+      color: white;
+      font-size: 2rem;
+      text-align: center;
+      padding: 40px;
+    }
+    .dog{
+      animation: rotate-dog 3s ease infinite;
+    }
+  }

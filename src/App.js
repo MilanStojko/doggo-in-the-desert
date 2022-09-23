@@ -12,6 +12,7 @@ import Login from "./screens/login/Login";
 import Result from "./screens/result/Result";
 import Signup from "./screens/signup/Signup";
 import Tutorial from "./screens/tutorial/Tutorial";
+import PortraitView from "./components/functional/portraitView/PortraitView";
 
 function App() {
   // screen.orientation.lock('landscape-primary')
@@ -30,10 +31,8 @@ function App() {
             <Route path={SCREENS.leaderboard} element={<Leaderboard />} />
           </Routes>
         </Orientation>
-        <Orientation orientation="portrait">
-          <div className="portrait-view">
-            <h1>Please rotate your device</h1>
-          </div>
+        <Orientation orientation="portrait" alwaysRender={false}>
+          <PortraitView/>
         </Orientation>
       </DeviceOrientation>
     </div>
