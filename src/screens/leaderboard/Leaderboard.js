@@ -10,9 +10,9 @@ function Leaderboard() {
   let navigate = useNavigate();
   let rank = JSON.parse(localStorage.getItem("players")) || [];
 
-  function goToHome() {
+  function goToLogin() {
     sessionStorage.clear();
-    navigate(SCREENS.home);
+    navigate(SCREENS.login);
   }
   function goToGame() {
     navigate(SCREENS.game);
@@ -26,14 +26,14 @@ function Leaderboard() {
         <ul>
           {rank.length > 0 ? (
             rank
-            .sort((a, b) => a.score > b.score ? -1 : 1)
-            .map((element, key) => {
-              return (
-                <li key={key}>
-                  {element.username}: {element.score}
-                </li>
-              );
-            })
+              .sort((a, b) => (a.score > b.score ? -1 : 1))
+              .map((element, key) => {
+                return (
+                  <li key={key}>
+                    {element.username}: {element.score}
+                  </li>
+                );
+              })
           ) : (
             <p>No results available</p>
           )}
@@ -47,7 +47,7 @@ function Leaderboard() {
           />
           <Button
             label={"Logout"}
-            callBackClick={goToHome}
+            callBackClick={goToLogin}
             classCss={"secondary"}
           />
         </div>

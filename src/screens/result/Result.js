@@ -24,13 +24,14 @@ function Result() {
     localStorage.setItem("players", JSON.stringify(storedPlayers));
   }
 
-  function goToHome() {
+  function goToLogin() {
     sessionStorage.clear();
-    navigate(SCREENS.home);
+    navigate(SCREENS.login);
   }
 
   function goToGame() {
     navigate(SCREENS.game);
+    setNewScore();
   }
 
   function goToLeaderboard() {
@@ -61,7 +62,7 @@ function Result() {
 
         <Button
           label={"Logout"}
-          callBackClick={goToHome}
+          callBackClick={goToLogin}
           classCss={"tertiary"}
         />
       </section>
