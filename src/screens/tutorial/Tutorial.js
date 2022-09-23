@@ -2,86 +2,23 @@ import { useEffect, useState, setState, useSyncExternalStore } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SCREENS from "../../route/router";
+import responsive from "../../events/responsive";
+import elements from "../../utils/elements";
+
 import Button from "../../components/ui/button/Button";
 
-import Doggo from "../../components/hook/doggo/Doggo";
-
 import "./tutorial.scss";
-import rock from "../../assets/images/rock.png";
-import cactus from "../../assets/images/cactus.png";
-import cat from "../../assets/images/cat.png";
-import bone from "../../assets/images/bone.png";
-import cookie from "../../assets/images/cookie.png";
-import steak from "../../assets/images/steak.png";
-import bruxellessprout from "../../assets/images/bruxellessprout.png";
-import { element } from "prop-types";
 
 function Tutorial() {
-  const DOGGO_HEIGHT = 72;
-  const DOGGO_WIDTH = 100;
+  let getResponsive = responsive.handleResponsive();
+  const DOGGO_HEIGHT = 72 * getResponsive;
+  const DOGGO_WIDTH = 100 * getResponsive;
   const GAME_HEIGHT = window.innerHeight;
   const GAME_WIDTH = window.innerWidth;
-  const GRAVITY = 6;
-  const SPEED = 13;
-  const JUMP = 210;
-  const FOODBALK_ARR = [
-    {
-      img: rock,
-      width: 65,
-      height: 50,
-      score: 0,
-      obastacle: true,
-      position: 0,
-    },
-    {
-      img: cactus,
-      width: 65,
-      height: 80,
-      score: 0,
-      obastacle: true,
-      position: 0,
-    },
-    {
-      img: cat,
-      width: 60,
-      height: 110,
-      score: 0,
-      obastacle: true,
-      position: 0,
-    },
-    {
-      img: bone,
-      width: 40,
-      height: 40,
-      score: 1,
-      obastacle: false,
-      position: 80,
-    },
-    {
-      img: steak,
-      width: 60,
-      height: 40,
-      score: 3,
-      obastacle: false,
-      position: 130,
-    },
-    {
-      img: cookie,
-      width: 40,
-      height: 40,
-      score: 2,
-      obastacle: false,
-      position: 105,
-    },
-    {
-      img: bruxellessprout,
-      width: 40,
-      height: 40,
-      score: -1,
-      obastacle: false,
-      position: 105,
-    },
-  ];
+  const GRAVITY = 6 * getResponsive;
+  const SPEED = 13 * getResponsive;
+  const FOODBALK_ARR = elements;
+
   const [phase, setPhase] = useState(1);
   const [foodBalk, setFoodBalk] = useState({
     img: FOODBALK_ARR[0].img,

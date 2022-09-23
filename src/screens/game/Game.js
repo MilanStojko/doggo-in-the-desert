@@ -1,34 +1,14 @@
-import { useEffect, useState, setState, useSyncExternalStore } from "react";
+import { useEffect, useState, setState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SCREENS from "../../route/router";
-
-import Doggo from "../../components/hook/doggo/Doggo";
+import responsive from "../../events/responsive";
+import elements from "../../utils/elements";
 
 import "./game.scss";
-import rock from "../../assets/images/rock.png";
-import cactus from "../../assets/images/cactus.png";
-import cat from "../../assets/images/cat.png";
-import bone from "../../assets/images/bone.png";
-import cookie from "../../assets/images/cookie.png";
-import steak from "../../assets/images/steak.png";
-import bruxellessprout from "../../assets/images/bruxellessprout.png";
 
 function Game() {
-  function handleResponsive() {
-    if (window.innerHeight > 900 && window.innerWidth > 1100) {
-      return parseInt(2.5);
-    } else if (window.innerHeight > 630 && window.innerWidth > 1100) {
-      return parseInt(2);
-    } else if (window.innerHeight > 375 && window.innerWidth > 700) {
-      return parseInt(1.5);
-    } else {
-      return parseInt(1);
-    }
-  }
-  let getResponsive = handleResponsive();
-  console.log(getResponsive);
-  console.log();
+  let getResponsive = responsive.handleResponsive();
   const DOGGO_HEIGHT = 72 * getResponsive;
   const DOGGO_WIDTH = 100 * getResponsive;
   const GAME_HEIGHT = window.innerHeight;
@@ -36,64 +16,7 @@ function Game() {
   const GRAVITY = 6 * getResponsive;
   const SPEED = 13 * getResponsive;
   const JUMP = 210 * getResponsive;
-  const FOODBALK_ARR = [
-    {
-      img: rock,
-      width: 65 * getResponsive,
-      height: 50 * getResponsive,
-      score: 0,
-      obastacle: true,
-      position: 0 * getResponsive,
-    },
-    {
-      img: cactus,
-      width: 65 * getResponsive,
-      height: 80 * getResponsive,
-      score: 0,
-      obastacle: true,
-      position: 0 * getResponsive,
-    },
-    {
-      img: cat,
-      width: 50 * getResponsive,
-      height: 100 * getResponsive,
-      score: 0,
-      obastacle: true,
-      position: 0 * getResponsive,
-    },
-    {
-      img: bone,
-      width: 40 * getResponsive,
-      height: 40 * getResponsive,
-      score: 1,
-      obastacle: false,
-      position: 80 * getResponsive,
-    },
-    {
-      img: steak,
-      width: 60 * getResponsive,
-      height: 40 * getResponsive,
-      score: 3,
-      obastacle: false,
-      position: 130 * getResponsive,
-    },
-    {
-      img: cookie,
-      width: 40 * getResponsive,
-      height: 40 * getResponsive,
-      score: 2,
-      obastacle: false,
-      position: 105 * getResponsive,
-    },
-    {
-      img: bruxellessprout,
-      width: 40 * getResponsive,
-      height: 40 * getResponsive,
-      score: -1,
-      obastacle: false,
-      position: 105 * getResponsive,
-    },
-  ];
+  const FOODBALK_ARR = elements;
 
   const [foodBalk, setFoodBalk] = useState({
     img: FOODBALK_ARR[0].img,
@@ -162,7 +85,6 @@ function Game() {
     } else if (collided && foodBalk.obastacle === false) {
       setDisplay(false);
     }
-    console.log(score, "nello score");
     setGameStarted(gameEnd);
     let balkId;
     if (gameStarted && balkLeft >= -foodBalk.width) {
@@ -171,6 +93,7 @@ function Game() {
       }, 24);
     } else {
       let newBalk = FOODBALK_ARR[~~(Math.random() * FOODBALK_ARR.length)];
+      setDisplay(true);
       setFoodBalk({
         img: newBalk.img,
         width: newBalk.width,
@@ -179,7 +102,6 @@ function Game() {
         obastacle: newBalk.obastacle,
         position: newBalk.position,
       });
-      setDisplay(true);
       setBalkLeft(GAME_WIDTH - foodBalk.width);
     }
     return () => {
@@ -235,6 +157,9 @@ function Game() {
             className="doggo_img"
             src={require("../../assets/images/spritesheet.png")}
             alt="dog"
+            style={{
+              height: DOGGO_HEIGHT,
+            }}
           />
         </div>
         {display && (

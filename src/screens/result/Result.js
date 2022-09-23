@@ -7,9 +7,6 @@ import Button from "../../components/ui/button/Button"
 import './result.scss'
 
 function Result() {
-  const [state, setState] = useState({
-    score: 5
-  })
   let navigate = useNavigate()
   const location = useLocation()
 
@@ -24,7 +21,7 @@ function Result() {
   function goToLeaderboard(){
     navigate(SCREENS.leaderboard)
   }
-
+  
   return(
     <div className="result">
       
