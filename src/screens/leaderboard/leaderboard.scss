@@ -3,15 +3,10 @@
 .leaderboard{
     background-color: $purple;
     color: #fff;
-    display: grid;
     grid-template-columns: 2fr 1fr;
     align-items: center;
     justify-items: center;
-    min-height: calc(100vh - 40px);
-    padding: 20px;
     section{
-        min-height: calc(100vh - 40px);
-        display: flex;
         flex-direction: column;
         align-items: start;
         justify-content: space-around;

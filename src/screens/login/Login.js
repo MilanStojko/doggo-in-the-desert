@@ -69,22 +69,18 @@ function Login() {
           <Button
             callBackClick={submit}
             label={'login'}
+            classCss={'primary'}
           />
         </form>
 
         <Button
           label={'or Sign in'}
-          objCss={{
-            backgroundColor: 'transparent',
-            fontSize: '10px',
-            color: 'rgba(0,0,0,0.7)',
-            marginTop: '0'
-          }}
           callBackClick={goToSignup}
+          classCss={'tertiary'}
         />
       </section>
 
-      <section><img src={require('../../assets/images/sphinx.png')} alt="" /></section>
+      <section><img className="cover-login" src={require('../../assets/images/sphinx.png')} alt="" /></section>
     </div>
   )
 }

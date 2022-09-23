@@ -31,13 +31,6 @@ Button.propTypes = {
 Button.defaultProps = {
   label: "play",
   classCss:'',
-  objCss: {
-    backgroundColor: '#FFDC3B',
-    fontSize: '16px',
-    padding: '10px 20px',
-    borderRadius: '3px',
-    marginTop: '10px'
-  }
 }
 
 export default Button

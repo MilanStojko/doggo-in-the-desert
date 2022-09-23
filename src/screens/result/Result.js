@@ -35,40 +35,19 @@ function Result() {
           <Button
             label={'Restart'}
             callBackClick={goToGame}
-            objCss={{
-              backgroundColor: '#ffcd4f',
-              color: '#000',
-              border: '1px #ffcd4f solid',
-              fontSize: '16px',
-              padding: '10px 20px',
-              borderRadius: '3px',
-              margin: '0 5px'
-            }}
+            classCss={'primary'}
           />
           <Button
             label={'Rank'}
             callBackClick={goToLeaderboard}
-            objCss={{
-              backgroundColor: 'transparent',
-              color: '#fff',
-              border: '1px #ffcd4f solid',
-              fontSize: '16px',
-              padding: '10px 20px',
-              borderRadius: '3px',
-              margin: '0 5px'
-            }}
+            classCss={'secondary'}
           />
         </div>
 
         <Button
           label={'Logout'}
-          objCss={{
-            backgroundColor: 'transparent',
-            fontSize: '12px',
-            color: 'rgba(255,255,255,0.7)',
-            marginTop: '0'
-          }}
           callBackClick={goToHome}
+          classCss={'tertiary'}
         />
       </section>
 

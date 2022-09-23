@@ -17,3 +17,13 @@
     height: 72px;
     max-width: auto;
 }
+
+@media(min-width: 1050px){
+    .dog{
+        width: 200px;
+        height: 144px;
+    }
+    .doggo_img{
+        height: 144px;
+    }
+}

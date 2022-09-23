@@ -23,3 +23,36 @@ img {
 body, button, input{
   font-family: $julius;
 }
+body{
+  overflow: hidden;
+}
+
+.home, .login, .signup, .result, .leaderboard{
+  display: grid;
+  padding: 20px;
+  section{
+    display: flex;
+    min-height: calc(100vh - 40px);
+  }
+}
+
+h1{
+  font-size: 50px;
+}
+
+@media(min-width: 1050px){
+  *{
+    font-size: 1.2rem;
+  }
+
+  .home, .login, .signup, .result, .leaderboard{
+    padding: 50px;
+    section{
+      min-height: calc(100vh - 100px);
+    }
+  }
+  
+  h1{
+    font-size: 100px;
+  }
+}
