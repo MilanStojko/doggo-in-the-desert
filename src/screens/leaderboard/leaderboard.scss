@@ -18,15 +18,10 @@
         margin: 20px 0;
         max-height: 50vh;
         overflow-y: scroll;
+        overflow-x: hidden;
         padding: 10px 15px 10px 0;
         &::-webkit-scrollbar {
-            width: 10px;
-        }
-        &::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        &::-webkit-scrollbar-thumb {
-            background: $yellow;
+            display: none;
         }
     }
 }
