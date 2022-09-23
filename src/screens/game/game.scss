@@ -103,9 +103,33 @@
   }
 }
 
-.cleopatra{
+.cleopatra {
   position: fixed;
   top: 50px;
   right: 50px;
   z-index: 102;
+}
+@media (min-width: 1000px) {
+  .stats {
+    padding: 15px 30px;
+    p {
+      width: 300px;
+      font-size: 2rem;
+      &:first-child,
+      &:last-child {
+        font-size: 18px;
+      }
+    }
+  }
+  .cleopatra {
+    top: 100px;
+    right: 75px;
+    height: 250px;
+    width: auto;
+    z-index: 102;
+    img {
+      height: 250px;
+      width: auto;
+    }
+  }
 }
